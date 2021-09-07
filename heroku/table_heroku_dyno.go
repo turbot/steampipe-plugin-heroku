@@ -49,7 +49,7 @@ func listDyno(ctx context.Context, d *plugin.QueryData, h *plugin.HydrateData) (
 		return nil, err
 	}
 	appName := d.KeyColumnQuals["app_name"].GetStringValue()
-	opts := heroku.ListRange{Field: "id"}
+	opts := heroku.ListRange{Field: "id", Max: 1000}
 	items, err := conn.DynoList(ctx, appName, &opts)
 	if err != nil {
 		plugin.Logger(ctx).Error("heroku_dyno.listDyno", "query_error", err, "opts", opts)
@@ -57,6 +57,10 @@ func listDyno(ctx context.Context, d *plugin.QueryData, h *plugin.HydrateData) (
 	}
 	for _, i := range items {
 		d.StreamListItem(ctx, i)
+		// Context can be cancelled due to manual cancellation or the limit has been hit
+		if plugin.IsCancelled(ctx) {
+			return nil, nil
+		}
 	}
 	return nil, nil
 }

@@ -54,7 +54,7 @@ func listApp(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (i
 		plugin.Logger(ctx).Error("heroku_app.listApp", "connection_error", err)
 		return nil, err
 	}
-	opts := heroku.ListRange{Field: "id"}
+	opts := heroku.ListRange{Field: "id", Max: 1000}
 	items, err := conn.AppList(ctx, &opts)
 	if err != nil {
 		plugin.Logger(ctx).Error("heroku_app.listApp", "query_error", err, "opts", opts)
@@ -62,6 +62,10 @@ func listApp(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (i
 	}
 	for _, i := range items {
 		d.StreamListItem(ctx, i)
+		// Context can be cancelled due to manual cancellation or the limit has been hit
+		if plugin.IsCancelled(ctx) {
+			return nil, nil
+		}
 	}
 	return nil, nil
 }

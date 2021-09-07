@@ -42,7 +42,7 @@ func listRegion(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData)
 		plugin.Logger(ctx).Error("heroku_region.listRegion", "connection_error", err)
 		return nil, err
 	}
-	opts := heroku.ListRange{Field: "id"}
+	opts := heroku.ListRange{Field: "id", Max: 1000}
 	items, err := conn.RegionList(ctx, &opts)
 	if err != nil {
 		plugin.Logger(ctx).Error("heroku_region.listRegion", "query_error", err, "opts", opts)
@@ -50,6 +50,10 @@ func listRegion(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData)
 	}
 	for _, i := range items {
 		d.StreamListItem(ctx, i)
+		// Context can be cancelled due to manual cancellation or the limit has been hit
+		if plugin.IsCancelled(ctx) {
+			return nil, nil
+		}
 	}
 	return nil, nil
 }

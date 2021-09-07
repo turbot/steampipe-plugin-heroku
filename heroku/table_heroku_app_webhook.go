@@ -45,7 +45,7 @@ func listWebhook(ctx context.Context, d *plugin.QueryData, h *plugin.HydrateData
 		return nil, err
 	}
 	appName := d.KeyColumnQuals["app_name"].GetStringValue()
-	opts := heroku.ListRange{Field: "id"}
+	opts := heroku.ListRange{Field: "id", Max: 1000}
 	items, err := conn.AppWebhookList(ctx, appName, &opts)
 	if err != nil {
 		plugin.Logger(ctx).Error("heroku_app_webhook.listWebhook", "query_error", err, "opts", opts)
@@ -53,6 +53,10 @@ func listWebhook(ctx context.Context, d *plugin.QueryData, h *plugin.HydrateData
 	}
 	for _, i := range items {
 		d.StreamListItem(ctx, i)
+		// Context can be cancelled due to manual cancellation or the limit has been hit
+		if plugin.IsCancelled(ctx) {
+			return nil, nil
+		}
 	}
 	return nil, nil
 }
