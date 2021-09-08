@@ -43,6 +43,12 @@ func listTeamMember(ctx context.Context, d *plugin.QueryData, h *plugin.HydrateD
 	}
 	teamName := d.KeyColumnQuals["team_name"].GetStringValue()
 	opts := heroku.ListRange{Field: "id", Max: 1000}
+	limit := d.QueryContext.Limit
+	if limit != nil {
+		if *limit < int64(1000) {
+			opts.Max = int(*limit)
+		}
+	}
 	items, err := conn.TeamMemberList(ctx, teamName, &opts)
 	if err != nil {
 		plugin.Logger(ctx).Error("heroku_team_member.listTeamMember", "query_error", err, "opts", opts)

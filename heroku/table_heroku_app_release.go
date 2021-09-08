@@ -49,6 +49,12 @@ func listAppRelease(ctx context.Context, d *plugin.QueryData, h *plugin.HydrateD
 	}
 	appName := d.KeyColumnQuals["app_name"].GetStringValue()
 	opts := heroku.ListRange{Field: "id", Max: 1000}
+	limit := d.QueryContext.Limit
+	if limit != nil {
+		if *limit < int64(1000) {
+			opts.Max = int(*limit)
+		}
+	}
 	items, err := conn.ReleaseList(ctx, appName, &opts)
 	if err != nil {
 		plugin.Logger(ctx).Error("heroku_app_release.listAppRelease", "query_error", err, "opts", opts)

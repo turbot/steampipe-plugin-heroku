@@ -47,6 +47,12 @@ func listTeam(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (
 		return nil, err
 	}
 	opts := heroku.ListRange{Field: "id", Max: 1000}
+	limit := d.QueryContext.Limit
+	if limit != nil {
+		if *limit < int64(1000) {
+			opts.Max = int(*limit)
+		}
+	}
 	items, err := conn.TeamList(ctx, &opts)
 	if err != nil {
 		plugin.Logger(ctx).Error("heroku_team.listTeam", "query_error", err, "opts", opts)
