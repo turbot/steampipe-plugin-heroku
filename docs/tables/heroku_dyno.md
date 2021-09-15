@@ -2,6 +2,12 @@
 
 Dynos encapsulate running processes of an app on Heroku.
 
+Notes:
+* List queries require an `app_name`.
+* Get queries require an `app_name` and a dyno `id`.
+
+Pagination is not currently supported for this table.
+
 ## Examples
 
 ### List all dynos of an app

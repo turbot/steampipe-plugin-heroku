@@ -2,6 +2,12 @@
 
 Webhooks define what web routes should be routed to an app on Heroku.
 
+Notes:
+* List queries require an `app_name`.
+* Get queries require an `app_name` and webhook `id`.
+
+Pagination is not currently supported for this table.
+
 ## Examples
 
 ### List all webhooks of an app

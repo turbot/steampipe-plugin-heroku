@@ -2,6 +2,11 @@
 
 Add-ons are components, services, or pieces of infrastructure that are fully maintained for you, either by a third-party provider or by Heroku.
 
+Notes:
+* Get queries require an add-on `id`.
+
+Pagination is not currently supported for this table.
+
 ## Examples
 
 ### List all add-ons

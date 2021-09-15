@@ -2,6 +2,11 @@
 
 An app represents the program that you would like to deploy and run on Heroku.
 
+Notes:
+* Get queries require an app `id`.
+
+Pagination is not currently supported for this table.
+
 ## Examples
 
 ### List all apps

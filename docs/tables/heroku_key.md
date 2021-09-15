@@ -2,6 +2,11 @@
 
 Keys represent public SSH keys associated with an account and are used to authorize accounts as they are performing git operations.
 
+Notes:
+* Get queries require a key `id`.
+
+Pagination is not currently supported for this table.
+
 ## Examples
 
 ### List all keys

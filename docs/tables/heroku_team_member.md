@@ -2,6 +2,11 @@
 
 A team member is an individual with access to a team.
 
+Notes:
+* List queries require an `team_name`.
+
+Pagination is not currently supported for this table.
+
 ## Examples
 
 ### List all team members

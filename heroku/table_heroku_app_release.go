@@ -2,6 +2,7 @@ package heroku
 
 import (
 	"context"
+	"strconv"
 
 	heroku "github.com/heroku/heroku-go/v5"
 
@@ -19,13 +20,28 @@ func tableHerokuAppRelease(ctx context.Context) *plugin.Table {
 			Hydrate:    listAppRelease,
 		},
 		Get: &plugin.GetConfig{
-			KeyColumns: plugin.AllColumns([]string{"id", "app_name"}),
+			// KeyColumns: plugin.AllColumns([]string{"id", "app_name"}),
 			Hydrate:    getAppRelease,
+			KeyColumns: []*plugin.KeyColumn{
+				{
+					Name:    "app_name",
+					Require: plugin.Required,
+				},
+				{
+					Name:    "id",
+					Require: plugin.AnyOf,
+				},
+				{
+					Name:    "version",
+					Require: plugin.AnyOf,
+				},
+			},
 		},
 		Columns: []*plugin.Column{
 			// Top columns
 			{Name: "id", Type: proto.ColumnType_STRING, Description: "Unique identifier of release."},
 			{Name: "status", Type: proto.ColumnType_STRING, Description: "Current status of the release."},
+			{Name: "version", Type: proto.ColumnType_INT, Description: "Unique version assigned to the release."},
 			{Name: "is_current", Type: proto.ColumnType_BOOL, Transform: transform.FromField("Current"), Description: "Indicates this release as being the current one for the app."},
 			// Other columns
 
@@ -76,11 +92,15 @@ func getAppRelease(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateDa
 		plugin.Logger(ctx).Error("heroku_app_release.getAppRelease", "connection_error", err)
 		return nil, err
 	}
-	id := d.KeyColumnQuals["id"].GetStringValue()
+	identifier := d.KeyColumnQuals["id"].GetStringValue()
+	if identifier == "" {
+		tmp := d.KeyColumnQuals["version"].GetInt64Value()
+		identifier= strconv.Itoa(int(tmp))
+	}
 	appName := d.KeyColumnQuals["app_name"].GetStringValue()
-	item, err := conn.ReleaseInfo(ctx, appName, id)
+	item, err := conn.ReleaseInfo(ctx, appName, identifier)
 	if err != nil {
-		plugin.Logger(ctx).Error("heroku_app_release.getAppRelease", "query_error", err, "id", id)
+		plugin.Logger(ctx).Error("heroku_app_release.getAppRelease", "query_error", err, "identifier", identifier)
 		return nil, err
 	}
 	return item, err

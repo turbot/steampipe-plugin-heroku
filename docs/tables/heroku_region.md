@@ -2,6 +2,11 @@
 
 A region represents a geographic location in which your application may run.
 
+Notes:
+* Get queries require a region `id`.
+
+Pagination is not currently supported for this table.
+
 ## Examples
 
 ### List all regions
