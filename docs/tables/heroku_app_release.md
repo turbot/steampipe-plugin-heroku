@@ -10,7 +10,7 @@ Pagination is not currently supported for this resource type in the SDK.
 
 ## Examples
 
-### List all app releases of an app
+### List all app releases
 
 ```sql
 select
@@ -40,7 +40,7 @@ where
   app_name = 'steampipe' and is_current;
 ```
 
-### Get the release information of an app by release id
+### Get the release information of an app by release ID
 
 ```sql
 select

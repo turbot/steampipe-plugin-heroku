@@ -10,7 +10,7 @@ Pagination is not currently supported for this resource type in the SDK.
 
 ## Examples
 
-### List all webhooks of an app
+### List all webhooks
 
 ```sql
 select
@@ -24,7 +24,7 @@ where
   app_name = 'steampipe';
 ```
 
-### List all notify level webhooks of an app
+### List all notify level webhooks
 
 ```sql
 select

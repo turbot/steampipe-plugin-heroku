@@ -10,7 +10,7 @@ Pagination is not currently supported for this resource type in the SDK.
 
 ## Examples
 
-### List all domains of an app
+### List all domains
 
 ```sql
 select
@@ -24,7 +24,7 @@ where
   app_name = 'steampipe';
 ```
 
-### List all custom domains of an app
+### List all custom domains
 
 ```sql
 select

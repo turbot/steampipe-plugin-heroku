@@ -10,7 +10,7 @@ Pagination is not currently supported for this resource type in the SDK.
 
 ## Examples
 
-### List all dynos of an app
+### List all dynos
 
 ```sql
 select
@@ -25,7 +25,7 @@ where
   app_name = 'steampipe';
 ```
 
-### List all crashed dynos of an app
+### List all crashed dynos
 
 ```sql
 select
@@ -40,7 +40,7 @@ where
   app_name = 'steampipe' and state = 'crashed';
 ```
 
-### List all hobby size dynos of an app
+### List all hobby size dynos
 
 ```sql
 select

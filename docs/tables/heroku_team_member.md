@@ -20,7 +20,7 @@ from
   heroku_team_member;
 ```
 
-### Find all the federated team members
+### List all federated team members
 
 ```sql
 select
@@ -34,7 +34,7 @@ where
   is_federated;
 ```
 
-### Find all the team members who haven't enabled two factor authentication
+### List all team members who haven't enabled two-factor authentication
 
 ```sql
 select
