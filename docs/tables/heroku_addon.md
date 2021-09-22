@@ -5,7 +5,7 @@ Add-ons are components, services, or pieces of infrastructure that are fully mai
 Notes:
 * Get queries require an add-on `id`.
 
-Pagination is not currently supported for this table.
+Pagination is not currently supported for this resource type in the SDK.
 
 ## Examples
 

@@ -6,7 +6,7 @@ Notes:
 * List queries require an `app_name`.
 * Get queries require an `app_name`, a release `id` or a release `version`.
 
-Pagination is not currently supported for this table.
+Pagination is not currently supported for this resource type in the SDK.
 
 ## Examples
 

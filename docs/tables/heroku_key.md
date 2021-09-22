@@ -5,7 +5,7 @@ Keys represent public SSH keys associated with an account and are used to author
 Notes:
 * Get queries require a key `id`.
 
-Pagination is not currently supported for this table.
+Pagination is not currently supported for this resource type in the SDK.
 
 ## Examples
 
