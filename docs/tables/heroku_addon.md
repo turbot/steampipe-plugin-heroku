@@ -35,7 +35,7 @@ where
   state = 'provisioned';
 ```
 
-### Add-ons that have not changed for 30 days or more
+### List add-ons that have not changed for 30 days or more
 
 ```sql
 select
