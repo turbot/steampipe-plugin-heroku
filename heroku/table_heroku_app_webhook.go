@@ -27,12 +27,11 @@ func tableHerokuAppWebhook(ctx context.Context) *plugin.Table {
 			{Name: "id", Type: proto.ColumnType_STRING, Description: "The webhook's unique identifier."},
 			{Name: "url", Type: proto.ColumnType_STRING, Description: "The URL where the webhook's notification requests are sent."},
 			// Other columns
-
 			{Name: "app", Type: proto.ColumnType_JSON, Description: "Identity of app. Only used for customer webhooks."},
 			{Name: "app_name", Type: proto.ColumnType_STRING, Description: "The app name .", Transform: transform.FromField("App.Name")},
 			{Name: "created_at", Type: proto.ColumnType_TIMESTAMP, Description: "When the webhook was created."},
-			{Name: "include", Type: proto.ColumnType_JSON, Description: "The entities that the subscription provides notifications for.",},
-			{Name: "level", Type: proto.ColumnType_STRING, Description: "If `notify`, Heroku makes a single, fire-and-forget delivery attempt.",},
+			{Name: "include", Type: proto.ColumnType_JSON, Description: "The entities that the subscription provides notifications for."},
+			{Name: "level", Type: proto.ColumnType_STRING, Description: "If `notify`, Heroku makes a single, fire-and-forget delivery attempt."},
 			{Name: "updated_at", Type: proto.ColumnType_TIMESTAMP, Description: "When the webhook was updated."},
 		},
 	}

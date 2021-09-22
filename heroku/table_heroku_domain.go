@@ -28,14 +28,13 @@ func tableHerokuDomain(ctx context.Context) *plugin.Table {
 			{Name: "status", Type: proto.ColumnType_STRING, Description: "Current status of the release."},
 			{Name: "kind", Type: proto.ColumnType_STRING, Description: "Type of domain name."},
 			// Other columns
-
-			{Name: "acm_status", Type: proto.ColumnType_STRING, Description: "status of this record's ACM.",},
-			{Name: "acm_status_reason", Type: proto.ColumnType_STRING, Description: "Reason for the status of this record's ACM.",},
+			{Name: "acm_status", Type: proto.ColumnType_STRING, Description: "status of this record's ACM."},
+			{Name: "acm_status_reason", Type: proto.ColumnType_STRING, Description: "Reason for the status of this record's ACM."},
 			{Name: "app", Type: proto.ColumnType_JSON, Description: "App that owns the domain."},
 			{Name: "app_name", Type: proto.ColumnType_STRING, Description: "ACM status of this app.", Transform: transform.FromField("App.Name")},
 			{Name: "cname", Type: proto.ColumnType_STRING, Description: "Canonical name record, the address to point a domain at."},
 			{Name: "created_at", Type: proto.ColumnType_TIMESTAMP, Description: "When release was created."},
-			{Name: "hostname", Type: proto.ColumnType_STRING, Description: "Full hostname.",},
+			{Name: "hostname", Type: proto.ColumnType_STRING, Description: "Full hostname."},
 			{Name: "sni_endpoint", Type: proto.ColumnType_JSON, Description: "SNI endpoint the domain is associated with."},
 			{Name: "updated_at", Type: proto.ColumnType_TIMESTAMP, Description: "When release was updated."},
 		},

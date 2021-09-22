@@ -28,15 +28,14 @@ func tableHerokuDyno(ctx context.Context) *plugin.Table {
 			{Name: "name", Type: proto.ColumnType_STRING, Description: "The name of this process on this dyno."},
 			{Name: "type", Type: proto.ColumnType_STRING, Description: "Type of process."},
 			// Other columns
-
 			{Name: "app", Type: proto.ColumnType_JSON, Description: "App formation belongs to."},
 			{Name: "app_name", Type: proto.ColumnType_STRING, Description: "App name formation belongs to.", Transform: transform.FromField("App.Name")},
-			{Name: "attach_url", Type: proto.ColumnType_STRING, Description: "A URL to stream output from for attached processes or null for.",},
+			{Name: "attach_url", Type: proto.ColumnType_STRING, Description: "A URL to stream output from for attached processes or null for."},
 			{Name: "command", Type: proto.ColumnType_STRING, Description: "Command used to start this process."},
 			{Name: "created_at", Type: proto.ColumnType_TIMESTAMP, Description: "When dyno was created."},
 			{Name: "release", Type: proto.ColumnType_JSON, Description: "App release of the dyno."},
-			{Name: "size", Type: proto.ColumnType_STRING, Description: "Dyno size (default: standard-1X).",},
-			{Name: "state", Type: proto.ColumnType_STRING, Description: "Current status of process (either: crashed, down, idle, starting, or up)",},
+			{Name: "size", Type: proto.ColumnType_STRING, Description: "Dyno size (default: standard-1X)."},
+			{Name: "state", Type: proto.ColumnType_STRING, Description: "Current status of process (either: crashed, down, idle, starting, or up)"},
 			{Name: "updated_at", Type: proto.ColumnType_TIMESTAMP, Description: "When process last changed state."},
 		},
 	}

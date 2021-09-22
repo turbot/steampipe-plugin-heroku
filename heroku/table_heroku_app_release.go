@@ -21,7 +21,7 @@ func tableHerokuAppRelease(ctx context.Context) *plugin.Table {
 		},
 		Get: &plugin.GetConfig{
 			// KeyColumns: plugin.AllColumns([]string{"id", "app_name"}),
-			Hydrate:    getAppRelease,
+			Hydrate: getAppRelease,
 			KeyColumns: []*plugin.KeyColumn{
 				{
 					Name:    "app_name",
@@ -44,7 +44,6 @@ func tableHerokuAppRelease(ctx context.Context) *plugin.Table {
 			{Name: "version", Type: proto.ColumnType_INT, Description: "Unique version assigned to the release."},
 			{Name: "is_current", Type: proto.ColumnType_BOOL, Transform: transform.FromField("Current"), Description: "Indicates this release as being the current one for the app."},
 			// Other columns
-
 			{Name: "addon_plan_names", Type: proto.ColumnType_JSON, Description: "Add-on plans installed on the app for this release."},
 			{Name: "app_name", Type: proto.ColumnType_STRING, Description: "ACM status of this app.", Transform: transform.FromField("App.Name")},
 			{Name: "created_at", Type: proto.ColumnType_TIMESTAMP, Description: "When release was created."},
@@ -95,7 +94,7 @@ func getAppRelease(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateDa
 	identifier := d.KeyColumnQuals["id"].GetStringValue()
 	if identifier == "" {
 		tmp := d.KeyColumnQuals["version"].GetInt64Value()
-		identifier= strconv.Itoa(int(tmp))
+		identifier = strconv.Itoa(int(tmp))
 	}
 	appName := d.KeyColumnQuals["app_name"].GetStringValue()
 	item, err := conn.ReleaseInfo(ctx, appName, identifier)
