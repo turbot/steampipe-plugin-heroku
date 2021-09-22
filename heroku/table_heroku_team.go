@@ -46,7 +46,13 @@ func listTeam(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (
 		plugin.Logger(ctx).Error("heroku_team.listTeam", "connection_error", err)
 		return nil, err
 	}
-	opts := heroku.ListRange{Field: "id"}
+	opts := heroku.ListRange{Field: "id", Max: 1000}
+	limit := d.QueryContext.Limit
+	if limit != nil {
+		if *limit < int64(1000) {
+			opts.Max = int(*limit)
+		}
+	}
 	items, err := conn.TeamList(ctx, &opts)
 	if err != nil {
 		plugin.Logger(ctx).Error("heroku_team.listTeam", "query_error", err, "opts", opts)
@@ -54,6 +60,10 @@ func listTeam(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (
 	}
 	for _, i := range items {
 		d.StreamListItem(ctx, i)
+		// Context can be cancelled due to manual cancellation or the limit has been hit
+		if plugin.IsCancelled(ctx) {
+			return nil, nil
+		}
 	}
 	return nil, nil
 }
