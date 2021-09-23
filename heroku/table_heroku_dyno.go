@@ -57,6 +57,9 @@ func listDyno(ctx context.Context, d *plugin.QueryData, h *plugin.HydrateData) (
 	}
 	items, err := conn.DynoList(ctx, appName, &opts)
 	if err != nil {
+		if isNotFoundError(err) {
+			return nil, nil
+		}
 		plugin.Logger(ctx).Error("heroku_dyno.listDyno", "query_error", err, "opts", opts)
 		return nil, err
 	}

@@ -72,6 +72,9 @@ func listAppRelease(ctx context.Context, d *plugin.QueryData, h *plugin.HydrateD
 	}
 	items, err := conn.ReleaseList(ctx, appName, &opts)
 	if err != nil {
+		if isNotFoundError(err) {
+			return nil, nil
+		}
 		plugin.Logger(ctx).Error("heroku_app_release.listAppRelease", "query_error", err, "opts", opts)
 		return nil, err
 	}

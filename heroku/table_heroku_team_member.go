@@ -51,6 +51,9 @@ func listTeamMember(ctx context.Context, d *plugin.QueryData, h *plugin.HydrateD
 	}
 	items, err := conn.TeamMemberList(ctx, teamName, &opts)
 	if err != nil {
+		if isNotFoundError(err) {
+			return nil, nil
+		}
 		plugin.Logger(ctx).Error("heroku_team_member.listTeamMember", "query_error", err, "opts", opts)
 		return nil, err
 	}

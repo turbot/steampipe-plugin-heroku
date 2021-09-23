@@ -53,6 +53,9 @@ func listWebhook(ctx context.Context, d *plugin.QueryData, h *plugin.HydrateData
 	}
 	items, err := conn.AppWebhookList(ctx, appName, &opts)
 	if err != nil {
+		if isNotFoundError(err) {
+			return nil, nil
+		}
 		plugin.Logger(ctx).Error("heroku_app_webhook.listWebhook", "query_error", err, "opts", opts)
 		return nil, err
 	}
