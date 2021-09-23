@@ -67,7 +67,7 @@ func connect(_ context.Context, d *plugin.QueryData) (*heroku.Service, error) {
 }
 
 func isNotFoundError(err error) bool {
-	return strings.Contains(err.Error(), "Couldn't find") || strings.Contains(err.Error(), "Not found")
+	return strings.Contains(err.Error(), "Couldn't find") || strings.Contains(err.Error(), "Not found") || strings.Contains(err.Error(), "Unable to process request with specified parameters")
 }
 
 /*
