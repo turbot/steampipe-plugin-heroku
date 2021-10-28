@@ -20,7 +20,7 @@ func Plugin(ctx context.Context) *plugin.Plugin {
 		},
 		TableMap: map[string]*plugin.Table{
 			"heroku_account":     tableHerokuAccount(ctx),
-			"heroku_addon":      tableHerokuAddOn(ctx),
+			"heroku_addon":       tableHerokuAddOn(ctx),
 			"heroku_app":         tableHerokuApp(ctx),
 			"heroku_app_release": tableHerokuAppRelease(ctx),
 			"heroku_app_webhook": tableHerokuAppWebhook(ctx),
