@@ -5,18 +5,18 @@ icon_url: "/images/plugins/turbot/heroku.svg"
 brand_color: "#430098"
 display_name: "Heroku"
 short_name: "heroku"
-description: "Steampipe plugin to query apps, dynos and more from Heroku."
+description: "Steampipe plugin to query apps, dynos, and more from Heroku."
 og_description: "Query Heroku with SQL! Open source CLI. No DB required."
 og_image: "/images/plugins/turbot/heroku-social-graphic.png"
 ---
 
 # Heroku + Steampipe
 
-[Heroku](https://heroku.com) is a cloud platform as a service (PaaS) supporting several programming languages.
+[Heroku](https://heroku.com) is a cloud-based Platform as a Service (PaaS) supporting application development across several programming languages.
 
 [Steampipe](https://steampipe.io) is an open source CLI to instantly query cloud APIs using SQL.
 
-List instances in your Heroku account:
+For example:
 
 ```sql
 select
@@ -37,7 +37,7 @@ from
 
 ## Documentation
 
-- **[Table definitions & examples →](/plugins/turbot/heroku/tables)**
+- **[Table definitions & examples →](https://hub.steampipe.io/plugins/turbot/heroku/tables)**
 
 ## Get started
 
@@ -49,26 +49,34 @@ Download and install the latest Heroku plugin:
 steampipe plugin install heroku
 ```
 
-### Credentials
-
-No credentials are required.
-
 ### Configuration
 
-Installing the latest heroku plugin will create a config file (`~/.steampipe/config/heroku.spc`) with a single connection named `heroku`:
+Installing the latest Heroku plugin will create a config file (`~/.steampipe/config/heroku.spc`) with a single connection named `heroku`:
 
 ```hcl
 connection "heroku" {
-  plugin  = "heroku"
-  email   = "ryan@dundermifflin.com"
-  api_key = "34c12972-9d18-421c-3ae5-5293ae1507be"
+  plugin     = "heroku"
+  # email    = "email address regsitered on Heroku"
+  # api_key  = "YOUR_API_KEY"
+
+  # API key for your Heroku account
+  # Reference: https://dashboard.heroku.com/account
 }
 ```
 
-- `email` - Email address of the Heroku user.
-- `api_key` - API key (or password) of the Heroku user.
+### Example Configuration
+
+Connect to an account:
+
+```hcl
+connection "heroku" {
+  plugin    = "heroku"
+  email     = "ryan@dundermifflin.com"
+  api_key   = "34c12972-9d18-421c-3ae5-5293ae1507be"
+}
+```
 
 ## Get involved
 
 - Open source: https://github.com/turbot/steampipe-plugin-heroku
-- Community: [Slack Channel](https://join.slack.com/t/steampipe/shared_invite/zt-oij778tv-lYyRTWOTMQYBVAbtPSWs3g)
+- Community: [Slack Channel](https://steampipe.io/community/join)
