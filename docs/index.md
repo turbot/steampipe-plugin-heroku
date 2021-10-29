@@ -55,12 +55,14 @@ Installing the latest Heroku plugin will create a config file (`~/.steampipe/con
 
 ```hcl
 connection "heroku" {
-  plugin     = "heroku"
+  plugin    = "heroku"
 
-  # email    = "email address regsitered on Heroku"
-  # api_key  = "YOUR_API_KEY"
-  # API key for your Heroku account
-  # Reference: https://dashboard.heroku.com/account
+  # Account email for the user
+  # email   = "ryan@dundermifflin.com"
+
+  # API key for your Heroku account, can be found in Heroku Account Settings
+  # Reference: https://help.heroku.com/PBGP6IDE/how-should-i-generate-an-api-key-that-allows-me-to-use-the-heroku-platform-api
+  # api_key   = "34c12972-9d18-421c-3ae5-5293ae1507be"
 }
 ```
 
