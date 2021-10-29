@@ -100,7 +100,7 @@ connection "heroku" {
   }
   ```
 
-## Get involved
+## Get Involved
 
 - Open source: https://github.com/turbot/steampipe-plugin-heroku
 - Community: [Slack Channel](https://steampipe.io/community/join)
