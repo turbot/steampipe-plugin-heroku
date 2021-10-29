@@ -55,28 +55,44 @@ Installing the latest Heroku plugin will create a config file (`~/.steampipe/con
 
 ```hcl
 connection "heroku" {
-  plugin    = "heroku"
+  plugin  = "heroku"
 
   # Account email for the user
-  # email   = "ryan@dundermifflin.com"
+  # email = "ryan@dundermifflin.com"
 
   # API key for your Heroku account, can be found in Heroku Account Settings
   # Reference: https://help.heroku.com/PBGP6IDE/how-should-i-generate-an-api-key-that-allows-me-to-use-the-heroku-platform-api
-  # api_key   = "34c12972-9d18-421c-3ae5-5293ae1507be"
+  # api_key = "34c12972-9d18-421c-3ae5-5293ae1507be"
 }
 ```
 
-### Example Configuration
+### Example Configurations
 
-Connect to an account:
+ - Connect to a single account:
 
-```hcl
-connection "heroku" {
-  plugin    = "heroku"
-  email     = "ryan@dundermifflin.com"
-  api_key   = "34c12972-9d18-421c-3ae5-5293ae1507be"
-}
-```
+    ```hcl
+    connection "heroku" {
+      plugin  = "heroku"
+      email   = "ryan@dundermifflin.com"
+      api_key = "34c12972-9d18-421c-3ae5-5293ae1507be"
+    }
+    ```
+
+- Create connections to multiple accounts:
+
+  ```hcl
+  connection "heroku" {
+    plugin  = "heroku"
+	  email   = "bob@mycompany.com"
+	  api_key = "9bcb761c-09ud-40af-be1b-880fdaa788e6"
+  }
+
+  connection "heroku1" {
+    plugin  = "heroku"
+	  email   = "janice@gmail.com"
+	  api_key = "c2414tre-5f12-4625-8784-2d4451c34783"
+  }
+  ```
 
 ## Get involved
 
