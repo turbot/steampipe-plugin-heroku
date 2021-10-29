@@ -74,7 +74,7 @@ connection "heroku" {
   connection "heroku" {
     plugin  = "heroku"
     email   = "ryan@dundermifflin.com"
-    api_key = "xoxp-2556146250-EXAMPLE-1646968370949-df954218b5da5b8614c85cc454136b27"
+    api_key = "8ccb761c-09ud-40ad-re1t-760fdaa788e4"
   }
   ```
 
