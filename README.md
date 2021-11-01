@@ -9,7 +9,7 @@ Use SQL to query apps, dynos and more from Heroku.
 - Community: [Slack Channel](https://steampipe.io/community/join)
 - Get involved: [Issues](https://github.com/turbot/steampipe-plugin-heroku/issues)
 
-## Quick start
+## Quick Start
 
 Install the plugin with [Steampipe](https://steampipe.io):
 
