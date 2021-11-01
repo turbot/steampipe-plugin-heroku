@@ -37,7 +37,7 @@ from
 
 ## Documentation
 
-- **[Table definitions & examples →](https://hub.steampipe.io/plugins/turbot/heroku/tables)**
+- **[Table definitions & examples →](/plugins/turbot/heroku/tables)**
 
 ## Get started
 
