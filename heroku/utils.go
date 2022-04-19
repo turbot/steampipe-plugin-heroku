@@ -27,13 +27,11 @@ func connect(_ context.Context, d *plugin.QueryData) (*heroku.Service, error) {
 
 	// Prefer config settings
 	herokuConfig := GetConfig(d.Connection)
-	if &herokuConfig != nil {
-		if herokuConfig.Email != nil {
-			email = *herokuConfig.Email
-		}
-		if herokuConfig.APIKey != nil {
-			apiKey = *herokuConfig.APIKey
-		}
+	if herokuConfig.Email != nil {
+		email = *herokuConfig.Email
+	}
+	if herokuConfig.APIKey != nil {
+		apiKey = *herokuConfig.APIKey
 	}
 
 	// Error if the minimum config is not set
