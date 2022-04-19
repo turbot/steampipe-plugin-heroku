@@ -1,6 +1,6 @@
 module github.com/turbot/steampipe-plugin-heroku
 
-go 1.17
+go 1.18
 
 require (
 	github.com/heroku/heroku-go/v5 v5.3.0
