@@ -5,9 +5,9 @@ import (
 
 	heroku "github.com/heroku/heroku-go/v5"
 
-	"github.com/turbot/steampipe-plugin-sdk/grpc/proto"
-	"github.com/turbot/steampipe-plugin-sdk/plugin"
-	"github.com/turbot/steampipe-plugin-sdk/plugin/transform"
+	"github.com/turbot/steampipe-plugin-sdk/v3/grpc/proto"
+	"github.com/turbot/steampipe-plugin-sdk/v3/plugin"
+	"github.com/turbot/steampipe-plugin-sdk/v3/plugin/transform"
 )
 
 func tableHerokuTeamMember(ctx context.Context) *plugin.Table {
@@ -16,7 +16,7 @@ func tableHerokuTeamMember(ctx context.Context) *plugin.Table {
 		Description: "A team member is an individual with access to a team.",
 		List: &plugin.ListConfig{
 			KeyColumns: plugin.SingleColumn("team_name"),
-			Hydrate:       listTeamMember,
+			Hydrate:    listTeamMember,
 		},
 		Columns: []*plugin.Column{
 			// Top columns
