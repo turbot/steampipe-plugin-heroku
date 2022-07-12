@@ -5,7 +5,7 @@ go 1.18
 require (
 	github.com/heroku/heroku-go/v5 v5.3.0
 	github.com/pkg/errors v0.9.1
-	github.com/turbot/steampipe-plugin-sdk/v3 v3.3.1
+	github.com/turbot/steampipe-plugin-sdk/v3 v3.3.2
 )
 
 require (
