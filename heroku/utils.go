@@ -10,7 +10,7 @@ import (
 	heroku "github.com/heroku/heroku-go/v5"
 
 	"github.com/pkg/errors"
-	"github.com/turbot/steampipe-plugin-sdk/v4/plugin"
+	"github.com/turbot/steampipe-plugin-sdk/v5/plugin"
 )
 
 func connect(_ context.Context, d *plugin.QueryData) (*heroku.Service, error) {

@@ -6,9 +6,9 @@ import (
 
 	heroku "github.com/heroku/heroku-go/v5"
 
-	"github.com/turbot/steampipe-plugin-sdk/v4/grpc/proto"
-	"github.com/turbot/steampipe-plugin-sdk/v4/plugin"
-	"github.com/turbot/steampipe-plugin-sdk/v4/plugin/transform"
+	"github.com/turbot/steampipe-plugin-sdk/v5/grpc/proto"
+	"github.com/turbot/steampipe-plugin-sdk/v5/plugin"
+	"github.com/turbot/steampipe-plugin-sdk/v5/plugin/transform"
 )
 
 func tableHerokuAppRelease(ctx context.Context) *plugin.Table {
@@ -62,7 +62,7 @@ func listAppRelease(ctx context.Context, d *plugin.QueryData, h *plugin.HydrateD
 		plugin.Logger(ctx).Error("heroku_app_release.listAppRelease", "connection_error", err)
 		return nil, err
 	}
-	appName := d.KeyColumnQuals["app_name"].GetStringValue()
+	appName := d.EqualsQuals["app_name"].GetStringValue()
 	opts := heroku.ListRange{Field: "id", Max: 1000}
 	limit := d.QueryContext.Limit
 	if limit != nil {
@@ -94,12 +94,12 @@ func getAppRelease(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateDa
 		plugin.Logger(ctx).Error("heroku_app_release.getAppRelease", "connection_error", err)
 		return nil, err
 	}
-	identifier := d.KeyColumnQuals["id"].GetStringValue()
+	identifier := d.EqualsQuals["id"].GetStringValue()
 	if identifier == "" {
-		tmp := d.KeyColumnQuals["version"].GetInt64Value()
+		tmp := d.EqualsQuals["version"].GetInt64Value()
 		identifier = strconv.Itoa(int(tmp))
 	}
-	appName := d.KeyColumnQuals["app_name"].GetStringValue()
+	appName := d.EqualsQuals["app_name"].GetStringValue()
 	item, err := conn.ReleaseInfo(ctx, appName, identifier)
 	if err != nil {
 		plugin.Logger(ctx).Error("heroku_app_release.getAppRelease", "query_error", err, "identifier", identifier)

@@ -3,8 +3,8 @@ package heroku
 import (
 	"context"
 
-	"github.com/turbot/steampipe-plugin-sdk/v4/grpc/proto"
-	"github.com/turbot/steampipe-plugin-sdk/v4/plugin"
+	"github.com/turbot/steampipe-plugin-sdk/v5/grpc/proto"
+	"github.com/turbot/steampipe-plugin-sdk/v5/plugin"
 )
 
 func tableHerokuPipeline(ctx context.Context) *plugin.Table {
@@ -59,7 +59,7 @@ func getPipeline(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData
 		plugin.Logger(ctx).Error("heroku_pipeline.getPipeline", "connection_error", err)
 		return nil, err
 	}
-	id := d.KeyColumnQuals["id"].GetStringValue()
+	id := d.EqualsQuals["id"].GetStringValue()
 	item, err := conn.PipelineInfo(ctx, id)
 	if err != nil {
 		plugin.Logger(ctx).Error("heroku_pipeline.getPipeline", "query_error", err, "id", id)

@@ -5,9 +5,9 @@ import (
 
 	heroku "github.com/heroku/heroku-go/v5"
 
-	"github.com/turbot/steampipe-plugin-sdk/v4/grpc/proto"
-	"github.com/turbot/steampipe-plugin-sdk/v4/plugin"
-	"github.com/turbot/steampipe-plugin-sdk/v4/plugin/transform"
+	"github.com/turbot/steampipe-plugin-sdk/v5/grpc/proto"
+	"github.com/turbot/steampipe-plugin-sdk/v5/plugin"
+	"github.com/turbot/steampipe-plugin-sdk/v5/plugin/transform"
 )
 
 func tableHerokuDomain(ctx context.Context) *plugin.Table {
@@ -47,7 +47,7 @@ func listDomain(ctx context.Context, d *plugin.QueryData, h *plugin.HydrateData)
 		plugin.Logger(ctx).Error("heroku_domain.listDomain", "connection_error", err)
 		return nil, err
 	}
-	appName := d.KeyColumnQuals["app_name"].GetStringValue()
+	appName := d.EqualsQuals["app_name"].GetStringValue()
 	opts := heroku.ListRange{Field: "id", Max: 1000}
 	limit := d.QueryContext.Limit
 	if limit != nil {
@@ -79,8 +79,8 @@ func getDomain(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) 
 		plugin.Logger(ctx).Error("heroku_domain.getDomain", "connection_error", err)
 		return nil, err
 	}
-	id := d.KeyColumnQuals["id"].GetStringValue()
-	appName := d.KeyColumnQuals["app_name"].GetStringValue()
+	id := d.EqualsQuals["id"].GetStringValue()
+	appName := d.EqualsQuals["app_name"].GetStringValue()
 	item, err := conn.DomainInfo(ctx, appName, id)
 	if err != nil {
 		plugin.Logger(ctx).Error("heroku_domain.getDomain", "query_error", err, "id", id)

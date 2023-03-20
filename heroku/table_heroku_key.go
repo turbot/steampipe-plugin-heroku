@@ -5,8 +5,8 @@ import (
 
 	heroku "github.com/heroku/heroku-go/v5"
 
-	"github.com/turbot/steampipe-plugin-sdk/v4/grpc/proto"
-	"github.com/turbot/steampipe-plugin-sdk/v4/plugin"
+	"github.com/turbot/steampipe-plugin-sdk/v5/grpc/proto"
+	"github.com/turbot/steampipe-plugin-sdk/v5/plugin"
 )
 
 func tableHerokuKey(ctx context.Context) *plugin.Table {
@@ -68,7 +68,7 @@ func getKey(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (in
 		plugin.Logger(ctx).Error("heroku_key.getKey", "connection_error", err)
 		return nil, err
 	}
-	id := d.KeyColumnQuals["id"].GetStringValue()
+	id := d.EqualsQuals["id"].GetStringValue()
 	item, err := conn.KeyInfo(ctx, id)
 	if err != nil {
 		plugin.Logger(ctx).Error("heroku_key.getKey", "query_error", err, "id", id)
