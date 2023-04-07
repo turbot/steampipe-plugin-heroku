@@ -5,9 +5,9 @@ import (
 
 	heroku "github.com/heroku/heroku-go/v5"
 
-	"github.com/turbot/steampipe-plugin-sdk/v4/grpc/proto"
-	"github.com/turbot/steampipe-plugin-sdk/v4/plugin"
-	"github.com/turbot/steampipe-plugin-sdk/v4/plugin/transform"
+	"github.com/turbot/steampipe-plugin-sdk/v5/grpc/proto"
+	"github.com/turbot/steampipe-plugin-sdk/v5/plugin"
+	"github.com/turbot/steampipe-plugin-sdk/v5/plugin/transform"
 )
 
 func tableHerokuDyno(ctx context.Context) *plugin.Table {
@@ -47,7 +47,7 @@ func listDyno(ctx context.Context, d *plugin.QueryData, h *plugin.HydrateData) (
 		plugin.Logger(ctx).Error("heroku_dyno.listDyno", "connection_error", err)
 		return nil, err
 	}
-	appName := d.KeyColumnQuals["app_name"].GetStringValue()
+	appName := d.EqualsQuals["app_name"].GetStringValue()
 	opts := heroku.ListRange{Field: "id", Max: 1000}
 	limit := d.QueryContext.Limit
 	if limit != nil {
@@ -79,8 +79,8 @@ func getDyno(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (i
 		plugin.Logger(ctx).Error("heroku_dyno.getDyno", "connection_error", err)
 		return nil, err
 	}
-	id := d.KeyColumnQuals["id"].GetStringValue()
-	appName := d.KeyColumnQuals["app_name"].GetStringValue()
+	id := d.EqualsQuals["id"].GetStringValue()
+	appName := d.EqualsQuals["app_name"].GetStringValue()
 	item, err := conn.DynoInfo(ctx, appName, id)
 	if err != nil {
 		plugin.Logger(ctx).Error("heroku_dyno.getDyno", "query_error", err, "id", id)

@@ -5,9 +5,9 @@ import (
 
 	heroku "github.com/heroku/heroku-go/v5"
 
-	"github.com/turbot/steampipe-plugin-sdk/v4/grpc/proto"
-	"github.com/turbot/steampipe-plugin-sdk/v4/plugin"
-	"github.com/turbot/steampipe-plugin-sdk/v4/plugin/transform"
+	"github.com/turbot/steampipe-plugin-sdk/v5/grpc/proto"
+	"github.com/turbot/steampipe-plugin-sdk/v5/plugin"
+	"github.com/turbot/steampipe-plugin-sdk/v5/plugin/transform"
 )
 
 func tableHerokuTeamMember(ctx context.Context) *plugin.Table {
@@ -41,7 +41,7 @@ func listTeamMember(ctx context.Context, d *plugin.QueryData, h *plugin.HydrateD
 		plugin.Logger(ctx).Error("heroku_team_member.listTeamMember", "connection_error", err)
 		return nil, err
 	}
-	teamName := d.KeyColumnQuals["team_name"].GetStringValue()
+	teamName := d.EqualsQuals["team_name"].GetStringValue()
 	opts := heroku.ListRange{Field: "id", Max: 1000}
 	limit := d.QueryContext.Limit
 	if limit != nil {
