@@ -98,7 +98,7 @@ Each connection is implemented as a distinct [Postgres schema](https://www.postg
 select * from heroku_qa.heroku_team_member
 ```
 
-You can multi-account connections by using an [**aggregator** connection](https://steampipe.io/docs/using-steampipe/managing-connections#using-aggregators). Aggregators allow you to query data from multiple connections for a plugin as if they are a single connection.
+You can create multi-account connections by using an [**aggregator** connection](https://steampipe.io/docs/using-steampipe/managing-connections#using-aggregators). Aggregators allow you to query data from multiple connections for a plugin as if they are a single connection.
 
 ```hcl
 connection "heroku_all" {
@@ -114,7 +114,7 @@ Querying tables from this connection will return results from the `heroku_dev`, 
 select * from heroku_all.heroku_team_member
 ```
 
-Alternatively, can use an unqualified name and it will be resolved according to the [Search Path](https://steampipe.io/docs/guides/search-path). It's a good idea to name your aggregator first alphbetically, so that it is the first connection in the search path (i.e. `heroku_all` comes before `heroku_dev`):
+Alternatively, you can use an unqualified name and it will be resolved according to the [Search Path](https://steampipe.io/docs/guides/search-path). It's a good idea to name your aggregator first alphabetically so that it is the first connection in the search path (i.e. `heroku_all` comes before `heroku_dev`):
 
 ```sql
 select * from heroku_team_member
