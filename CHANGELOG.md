@@ -1,3 +1,9 @@
+## v0.5.0 [2023-07-17]
+
+_Enhancements_
+
+- Updated the `docs/index.md` file to include multi-account configuration examples. ([#22](https://github.com/turbot/steampipe-plugin-heroku/pull/22))
+
 ## v0.4.0 [2023-04-07]
 
 _Dependencies_
