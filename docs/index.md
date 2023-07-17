@@ -68,6 +68,68 @@ connection "heroku" {
 - `email` - Email address of the Heroku user.
 - `api_key` - API key (or password) of the Heroku user.
 
+## Multi-Account Connections
+
+You may create multiple heroku connections:
+
+```hcl
+connection "heroku_dev" {
+  plugin  = "heroku"
+  email   = "ryan@dundermifflin.com"
+  api_key = "34c12972-9d18-654c-3ae5-5293ae1889be"
+}
+
+connection "heroku_qa" {
+  plugin  = "heroku"
+  email   = "ryan@dundermifflin.com"
+  api_key = "34c12972-9d18-654c-3ae5-5293ae1905be"
+}
+
+connection "heroku_prod" {
+  plugin  = "heroku"
+  email   = "ryan@dundermifflin.com"
+  api_key = "34c12972-9d18-654c-3ae5-5293ae1124be"
+}
+```
+
+Each connection is implemented as a distinct [Postgres schema](https://www.postgresql.org/docs/current/ddl-schemas.html). As such, you can use qualified table names to query a specific connection:
+
+```sql
+select * from heroku_qa.heroku_team_member
+```
+
+You can create multi-account connections by using an [**aggregator** connection](https://steampipe.io/docs/using-steampipe/managing-connections#using-aggregators). Aggregators allow you to query data from multiple connections for a plugin as if they are a single connection.
+
+```hcl
+connection "heroku_all" {
+  plugin      = "heroku"
+  type        = "aggregator"
+  connections = ["heroku_dev", "heroku_qa", "heroku_prod"]
+}
+```
+
+Querying tables from this connection will return results from the `heroku_dev`, `heroku_qa`, and `heroku_prod` connections:
+
+```sql
+select * from heroku_all.heroku_team_member
+```
+
+Alternatively, you can use an unqualified name and it will be resolved according to the [Search Path](https://steampipe.io/docs/guides/search-path). It's a good idea to name your aggregator first alphabetically so that it is the first connection in the search path (i.e. `heroku_all` comes before `heroku_dev`):
+
+```sql
+select * from heroku_team_member
+```
+
+Steampipe supports the `*` wildcard in the connection names. For example, to aggregate all the heroku plugin connections whose names begin with `heroku_`:
+
+```hcl
+connection "heroku_all" {
+  type        = "aggregator"
+  plugin      = "heroku"
+  connections = ["heroku_*"]
+}
+```
+
 ## Get involved
 
 - Open source: https://github.com/turbot/steampipe-plugin-heroku
