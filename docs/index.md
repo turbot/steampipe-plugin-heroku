@@ -8,6 +8,7 @@ short_name: "heroku"
 description: "Steampipe plugin to query apps, dynos and more from Heroku."
 og_description: "Query Heroku with SQL! Open source CLI. No DB required."
 og_image: "/images/plugins/turbot/heroku-social-graphic.png"
+engines: ["steampipe", "sqlite", "postgres", "export"]
 ---
 
 # Heroku + Steampipe
