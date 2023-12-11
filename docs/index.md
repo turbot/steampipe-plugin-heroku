@@ -131,7 +131,4 @@ connection "heroku_all" {
 }
 ```
 
-## Get involved
 
-- Open source: https://github.com/turbot/steampipe-plugin-heroku
-- Community: [Join #steampipe on Slack →](https://turbot.com/community/join)
