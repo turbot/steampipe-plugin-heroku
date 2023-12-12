@@ -2,21 +2,11 @@ package heroku
 
 import (
 	"github.com/turbot/steampipe-plugin-sdk/v5/plugin"
-	"github.com/turbot/steampipe-plugin-sdk/v5/plugin/schema"
 )
 
 type herokuConfig struct {
-	Email  *string `cty:"email"`
-	APIKey *string `cty:"api_key"`
-}
-
-var ConfigSchema = map[string]*schema.Attribute{
-	"email": {
-		Type: schema.TypeString,
-	},
-	"api_key": {
-		Type: schema.TypeString,
-	},
+	Email  *string `hcl:"email"`
+	APIKey *string `hcl:"api_key"`
 }
 
 func ConfigInstance() interface{} {
