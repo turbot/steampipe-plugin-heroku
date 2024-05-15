@@ -22,7 +22,7 @@ func tableHerokuDyno(ctx context.Context) *plugin.Table {
 			KeyColumns: plugin.AllColumns([]string{"id", "app_name"}),
 			Hydrate:    getDyno,
 		},
-		Columns: []*plugin.Column{
+		Columns: commonColumns([]*plugin.Column{
 			// Top columns
 			{Name: "id", Type: proto.ColumnType_STRING, Description: "Unique identifier of this dyno."},
 			{Name: "name", Type: proto.ColumnType_STRING, Description: "The name of this process on this dyno."},
@@ -37,7 +37,7 @@ func tableHerokuDyno(ctx context.Context) *plugin.Table {
 			{Name: "size", Type: proto.ColumnType_STRING, Description: "Dyno size (default: standard-1X)."},
 			{Name: "state", Type: proto.ColumnType_STRING, Description: "Current status of process (either: crashed, down, idle, starting, or up)"},
 			{Name: "updated_at", Type: proto.ColumnType_TIMESTAMP, Description: "When process last changed state."},
-		},
+		}),
 	}
 }
 

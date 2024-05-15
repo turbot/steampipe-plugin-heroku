@@ -20,7 +20,7 @@ func tableHerokuAddOn(ctx context.Context) *plugin.Table {
 			KeyColumns: plugin.SingleColumn("id"),
 			Hydrate:    getAddOn,
 		},
-		Columns: []*plugin.Column{
+		Columns: commonColumns([]*plugin.Column{
 			// Top columns
 			{Name: "name", Type: proto.ColumnType_STRING, Description: "Globally unique name of the add-on."},
 			{Name: "id", Type: proto.ColumnType_STRING, Description: "Unique identifier of add-on."},
@@ -37,7 +37,7 @@ func tableHerokuAddOn(ctx context.Context) *plugin.Table {
 			{Name: "plan", Type: proto.ColumnType_JSON, Description: "Identity of add-on plan."},
 			{Name: "updated_at", Type: proto.ColumnType_TIMESTAMP, Description: "When add-on was updated."},
 			{Name: "web_url", Type: proto.ColumnType_STRING, Description: "URL for logging into web interface of add-on (e.g. a dashboard)."},
-		},
+		}),
 	}
 }
 

@@ -37,7 +37,7 @@ func tableHerokuAppRelease(ctx context.Context) *plugin.Table {
 				},
 			},
 		},
-		Columns: []*plugin.Column{
+		Columns: commonColumns([]*plugin.Column{
 			// Top columns
 			{Name: "id", Type: proto.ColumnType_STRING, Description: "Unique identifier of release."},
 			{Name: "status", Type: proto.ColumnType_STRING, Description: "Current status of the release."},
@@ -52,7 +52,7 @@ func tableHerokuAppRelease(ctx context.Context) *plugin.Table {
 			{Name: "slug", Type: proto.ColumnType_JSON, Description: "Slug running in this release."},
 			{Name: "updated_at", Type: proto.ColumnType_TIMESTAMP, Description: "When release was updated."},
 			{Name: "user", Type: proto.ColumnType_JSON, Description: "User that created the release."},
-		},
+		}),
 	}
 }
 
