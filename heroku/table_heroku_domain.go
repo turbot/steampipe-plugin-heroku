@@ -22,7 +22,7 @@ func tableHerokuDomain(ctx context.Context) *plugin.Table {
 			KeyColumns: plugin.AllColumns([]string{"id", "app_name"}),
 			Hydrate:    getDomain,
 		},
-		Columns: []*plugin.Column{
+		Columns: commonColumns([]*plugin.Column{
 			// Top columns
 			{Name: "id", Type: proto.ColumnType_STRING, Description: "Unique identifier of this domain."},
 			{Name: "status", Type: proto.ColumnType_STRING, Description: "Current status of the release."},
@@ -37,7 +37,7 @@ func tableHerokuDomain(ctx context.Context) *plugin.Table {
 			{Name: "hostname", Type: proto.ColumnType_STRING, Description: "Full hostname."},
 			{Name: "sni_endpoint", Type: proto.ColumnType_JSON, Description: "SNI endpoint the domain is associated with."},
 			{Name: "updated_at", Type: proto.ColumnType_TIMESTAMP, Description: "When release was updated."},
-		},
+		}),
 	}
 }
 

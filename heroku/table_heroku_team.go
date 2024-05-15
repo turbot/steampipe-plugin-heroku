@@ -21,7 +21,7 @@ func tableHerokuTeam(ctx context.Context) *plugin.Table {
 			KeyColumns: plugin.SingleColumn("id"),
 			Hydrate:    getTeam,
 		},
-		Columns: []*plugin.Column{
+		Columns: commonColumns([]*plugin.Column{
 			// Top columns
 			{Name: "name", Type: proto.ColumnType_STRING, Description: "Unique name of team."},
 			// Other columns
@@ -36,7 +36,7 @@ func tableHerokuTeam(ctx context.Context) *plugin.Table {
 			{Name: "role", Type: proto.ColumnType_STRING, Description: "Role in the team."},
 			{Name: "team_type", Transform: transform.FromField("Type"), Type: proto.ColumnType_STRING, Description: "Type of team."},
 			{Name: "updated_at", Type: proto.ColumnType_TIMESTAMP, Description: "When the team was updated."},
-		},
+		}),
 	}
 }
 

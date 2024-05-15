@@ -20,7 +20,7 @@ func tableHerokuApp(ctx context.Context) *plugin.Table {
 			KeyColumns: plugin.SingleColumn("id"),
 			Hydrate:    getApp,
 		},
-		Columns: []*plugin.Column{
+		Columns: commonColumns([]*plugin.Column{
 			// Top columns
 			{Name: "name", Type: proto.ColumnType_STRING, Description: "Unique name of app."},
 			// Other columns
@@ -44,7 +44,7 @@ func tableHerokuApp(ctx context.Context) *plugin.Table {
 			{Name: "team", Type: proto.ColumnType_JSON, Description: "identity of team."},
 			{Name: "updated_at", Type: proto.ColumnType_TIMESTAMP, Description: "When app was updated."},
 			{Name: "web_url", Type: proto.ColumnType_STRING, Description: "Web URL of app."},
-		},
+		}),
 	}
 }
 

@@ -20,7 +20,7 @@ func tableHerokuPipeline(ctx context.Context) *plugin.Table {
 			KeyColumns: plugin.SingleColumn("id"),
 			Hydrate:    getPipeline,
 		},
-		Columns: []*plugin.Column{
+		Columns: commonColumns([]*plugin.Column{
 			// Top columns
 			{Name: "name", Type: proto.ColumnType_STRING, Description: "Name of pipeline."},
 			// Other columns
@@ -28,7 +28,7 @@ func tableHerokuPipeline(ctx context.Context) *plugin.Table {
 			{Name: "id", Type: proto.ColumnType_STRING, Description: "Unique identifier of pipeline."},
 			{Name: "owner", Type: proto.ColumnType_JSON, Description: "Owner of a pipeline."},
 			{Name: "updated_at", Type: proto.ColumnType_TIMESTAMP, Description: "When pipeline was updated."},
-		},
+		}),
 	}
 }
 
