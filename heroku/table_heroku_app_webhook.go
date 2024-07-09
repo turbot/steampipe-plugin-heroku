@@ -22,7 +22,7 @@ func tableHerokuAppWebhook(ctx context.Context) *plugin.Table {
 			KeyColumns: plugin.AllColumns([]string{"id", "app_name"}),
 			Hydrate:    getWebhook,
 		},
-		Columns: []*plugin.Column{
+		Columns: commonColumns([]*plugin.Column{
 			// Top columns
 			{Name: "id", Type: proto.ColumnType_STRING, Description: "The webhook's unique identifier."},
 			{Name: "url", Type: proto.ColumnType_STRING, Description: "The URL where the webhook's notification requests are sent."},
@@ -33,7 +33,7 @@ func tableHerokuAppWebhook(ctx context.Context) *plugin.Table {
 			{Name: "include", Type: proto.ColumnType_JSON, Description: "The entities that the subscription provides notifications for."},
 			{Name: "level", Type: proto.ColumnType_STRING, Description: "If `notify`, Heroku makes a single, fire-and-forget delivery attempt."},
 			{Name: "updated_at", Type: proto.ColumnType_TIMESTAMP, Description: "When the webhook was updated."},
-		},
+		}),
 	}
 }
 

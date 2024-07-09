@@ -18,7 +18,7 @@ func tableHerokuTeamMember(ctx context.Context) *plugin.Table {
 			KeyColumns: plugin.SingleColumn("team_name"),
 			Hydrate:    listTeamMember,
 		},
-		Columns: []*plugin.Column{
+		Columns: commonColumns([]*plugin.Column{
 			// Top columns
 			{Name: "email", Type: proto.ColumnType_STRING, Description: "Email address of the team member."},
 			// Other columns
@@ -31,7 +31,7 @@ func tableHerokuTeamMember(ctx context.Context) *plugin.Table {
 			{Name: "two_factor_authentication", Type: proto.ColumnType_BOOL, Description: "Whether the enterprise team member has two factor authentication."},
 			{Name: "updated_at", Type: proto.ColumnType_TIMESTAMP, Description: "When the membership record was updated."},
 			{Name: "user", Type: proto.ColumnType_JSON, Description: "User information for the membership."},
-		},
+		}),
 	}
 }
 

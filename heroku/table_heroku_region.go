@@ -20,7 +20,7 @@ func tableHerokuRegion(ctx context.Context) *plugin.Table {
 			KeyColumns: plugin.SingleColumn("id"),
 			Hydrate:    getRegion,
 		},
-		Columns: []*plugin.Column{
+		Columns: commonColumns([]*plugin.Column{
 			// Top columns
 			{Name: "name", Type: proto.ColumnType_STRING, Description: "Unique name of region."},
 			// Other columns
@@ -32,7 +32,7 @@ func tableHerokuRegion(ctx context.Context) *plugin.Table {
 			{Name: "private_capable", Type: proto.ColumnType_BOOL, Description: "Whether or not region is available for creating a Private Space."},
 			{Name: "provider", Type: proto.ColumnType_JSON, Description: "Provider of underlying substrate."},
 			{Name: "updated_at", Type: proto.ColumnType_TIMESTAMP, Description: "When region was updated."},
-		},
+		}),
 	}
 }
 

@@ -3,6 +3,7 @@ package heroku
 import (
 	"context"
 
+	v5 "github.com/heroku/heroku-go/v5"
 	"github.com/turbot/steampipe-plugin-sdk/v5/grpc/proto"
 	"github.com/turbot/steampipe-plugin-sdk/v5/plugin"
 )
@@ -14,7 +15,7 @@ func tableHerokuAccount(ctx context.Context) *plugin.Table {
 		List: &plugin.ListConfig{
 			Hydrate: getAccount,
 		},
-		Columns: []*plugin.Column{
+		Columns: commonColumns([]*plugin.Column{
 			// Top columns
 			{Name: "name", Type: proto.ColumnType_STRING, Description: "Full name of the account owner."},
 			{Name: "email", Type: proto.ColumnType_STRING, Description: "Unique email address of account."},
@@ -38,21 +39,16 @@ func tableHerokuAccount(ctx context.Context) *plugin.Table {
 			{Name: "suspended_at", Type: proto.ColumnType_TIMESTAMP, Description: "When account was suspended."},
 			{Name: "two_factor_authentication", Type: proto.ColumnType_BOOL, Description: "Whether two-factor auth is enabled on the account."},
 			{Name: "updated_at", Type: proto.ColumnType_TIMESTAMP, Description: "When account was updated."},
-		},
+		}),
 	}
 }
 
-func getAccount(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
-	conn, err := connect(ctx, d)
+func getAccount(ctx context.Context, d *plugin.QueryData, h *plugin.HydrateData) (interface{}, error) {
+	acc, err := getAccountIdMemoized(ctx, d, h)
 	if err != nil {
-		plugin.Logger(ctx).Error("heroku_account.getAccount", "connection_error", err)
+		plugin.Logger(ctx).Error("heroku_account.getAccount", "api_error", err)
 		return nil, err
 	}
-	item, err := conn.AccountInfo(ctx)
-	if err != nil {
-		plugin.Logger(ctx).Error("heroku_account.getAccount", "query_error", err)
-		return nil, err
-	}
-	d.StreamListItem(ctx, item)
+	d.StreamListItem(ctx, acc.(*v5.Account))
 	return nil, nil
 }

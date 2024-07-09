@@ -20,7 +20,7 @@ func tableHerokuKey(ctx context.Context) *plugin.Table {
 			KeyColumns: plugin.SingleColumn("id"),
 			Hydrate:    getKey,
 		},
-		Columns: []*plugin.Column{
+		Columns: commonColumns([]*plugin.Column{
 			// Top columns
 			{Name: "comment", Type: proto.ColumnType_STRING, Description: "Comment on the key."},
 			// Other columns
@@ -30,7 +30,7 @@ func tableHerokuKey(ctx context.Context) *plugin.Table {
 			{Name: "id", Type: proto.ColumnType_STRING, Description: "Unique identifier of this key."},
 			{Name: "public_key", Type: proto.ColumnType_STRING, Description: "Full public_key as uploaded."},
 			{Name: "updated_at", Type: proto.ColumnType_TIMESTAMP, Description: "When key was updated."},
-		},
+		}),
 	}
 }
 
