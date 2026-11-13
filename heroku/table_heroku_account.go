@@ -4,8 +4,8 @@ import (
 	"context"
 
 	v5 "github.com/heroku/heroku-go/v5"
-	"github.com/turbot/steampipe-plugin-sdk/v5/grpc/proto"
-	"github.com/turbot/steampipe-plugin-sdk/v5/plugin"
+	"github.com/turbot/steampipe-plugin-sdk/v6/grpc/proto"
+	"github.com/turbot/steampipe-plugin-sdk/v6/plugin"
 )
 
 func tableHerokuAccount(ctx context.Context) *plugin.Table {

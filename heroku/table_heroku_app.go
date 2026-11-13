@@ -5,8 +5,8 @@ import (
 
 	heroku "github.com/heroku/heroku-go/v5"
 
-	"github.com/turbot/steampipe-plugin-sdk/v5/grpc/proto"
-	"github.com/turbot/steampipe-plugin-sdk/v5/plugin"
+	"github.com/turbot/steampipe-plugin-sdk/v6/grpc/proto"
+	"github.com/turbot/steampipe-plugin-sdk/v6/plugin"
 )
 
 func tableHerokuApp(ctx context.Context) *plugin.Table {
